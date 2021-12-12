@@ -1,0 +1,2 @@
+# Sokoban
+control work

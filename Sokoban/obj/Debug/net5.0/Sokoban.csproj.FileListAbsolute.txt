@@ -1,0 +1,17 @@
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\Sokoban.exe
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\Sokoban.deps.json
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\Sokoban.runtimeconfig.json
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\Sokoban.runtimeconfig.dev.json
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\Sokoban.dll
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\ref\Sokoban.dll
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\Sokoban.pdb
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.csproj.AssemblyReference.cache
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.GeneratedMSBuildEditorConfig.editorconfig
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.AssemblyInfoInputs.cache
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.AssemblyInfo.cs
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.csproj.CoreCompileInputs.cache
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.dll
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\ref\Sokoban.dll
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.pdb
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.genruntimeconfig.cache
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.csproj.ResolveComReference.cache

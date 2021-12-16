@@ -5,8 +5,9 @@ namespace Sokoban
 {
     static class Sokoban
     {
-        static public Player player = new Player();
+        static public Player player;
         static public List<List<Entity>> entity;
+        static public int countMoves = 0;
 
         static public void InitializeGame(List<List<char>> map)
         {
@@ -50,13 +51,13 @@ namespace Sokoban
                     return new Box(entity, index1, index2);
                 case '?':
                     return new Pit(entity);
+                case '#':
+                    return new Wall(entity);
+                case 'p':
+                    player = new Player(entity, index1, index2);
+                    return player;
                 default:
-                    if (entity == 'p')
-                    {
-                        player.coordinate1 = index1;
-                        player.coordinate2 = index2;
-                    }
-                    return new OtherEntity(entity);
+                    return new Void(entity);
             }
         }
 
@@ -71,7 +72,7 @@ namespace Sokoban
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("\nСчётчик победы " + Box.countInPlace + "/" + Box.allBox + "\nСчётчик ходов " + player.countMoves);
+            Console.WriteLine("\nСчётчик победы " + Box.countInPlace + "/" + Box.allBox + "\nСчётчик ходов " + countMoves);
         }
 
         static private ActResult Act()
@@ -87,8 +88,12 @@ namespace Sokoban
                 selectedEntity.Action(player);
             }
 
-            if (char.ToLower(selectedEntity.name) != 'o')
+            countMoves++;
+
+            if (!(selectedEntity is Box))
                 player.MovePlayer();
+            //else if(Box.isDefeat((Box)selectedEntity))
+
 
             PrintMap();
 
@@ -102,12 +107,12 @@ namespace Sokoban
 
         static public void ChangeListEntity(int coordinate1, int coordinate2, int coordinate3, int coordinate4)
         {
-            if (entity[coordinate3][coordinate4].name == '+')
+            if (entity[coordinate3][coordinate4] is PlaceBox)
             {
                 entity[coordinate3][coordinate4] = CreateEntity(entity[coordinate1][coordinate2].name, coordinate3, coordinate4);
                 entity[coordinate3][coordinate4].name = char.ToUpper(entity[coordinate3][coordinate4].name);
             }
-            else if (entity[coordinate3][coordinate4].name != '?')
+            else if (!(entity[coordinate3][coordinate4] is Pit))
                 entity[coordinate3][coordinate4] = CreateEntity(char.ToLower(entity[coordinate1][coordinate2].name), coordinate3, coordinate4);
 
             if (entity[coordinate1][coordinate2].name == 'P' || entity[coordinate1][coordinate2].name == 'O')

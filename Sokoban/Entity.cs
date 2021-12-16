@@ -12,9 +12,9 @@ namespace Sokoban
         abstract public void Action(Entity entity);
     }
 
-    class OtherEntity: Entity
+    class Wall: Entity
     {
-        public OtherEntity(char name)
+        public Wall(char name)
         {
             this.name = name;
         }
@@ -28,15 +28,20 @@ namespace Sokoban
     class Player: Entity
     {
         public int coordinate1, coordinate2;
-        public int countMoves = 0;
 
         public Direction directionMove = Direction.Nothing;
+
+        public Player(char name, int coordinate1, int coordinate2)
+        {
+            this.name = name;
+            this.coordinate1 = coordinate1;
+            this.coordinate2 = coordinate2;
+        }
 
         public override void Action(Entity entity)
         {
             ConsoleKeyInfo keyPressed;
             keyPressed = Console.ReadKey();
-            countMoves++;
             directionMove = DetermineDirection(keyPressed);
         }
 
@@ -98,7 +103,7 @@ namespace Sokoban
             this.name = name;
             this.coordinate1 = coordinate1;
             this.coordinate2 = coordinate2;
-            if(Sokoban.player.countMoves == 0)
+            if(Sokoban.countMoves == 0)
                 allBox++;
         }
 
@@ -109,16 +114,40 @@ namespace Sokoban
             {
                 Sokoban.entity[coordinate1 + offset.Item1][coordinate2 + offset.Item2].Action(this);
                 Sokoban.ChangeListEntity(coordinate1, coordinate2, coordinate1 + offset.Item1, coordinate2 + offset.Item2);
-                Sokoban.ChangeListEntity(coordinate1 - offset.Item1, coordinate2 - offset.Item2, coordinate1, coordinate2);
+                Sokoban.player.MovePlayer();
                 coordinate1 += offset.Item1;
                 coordinate2 += offset.Item2;
             }
+        }
+
+        static public bool isDefeat(Box box)
+        {
+            if (box.name != 'O' &&
+                ((Sokoban.entity[box.coordinate1 + 1][box.coordinate2] is Wall && Sokoban.entity[box.coordinate1][box.coordinate2 + 1] is Wall) ||
+                (Sokoban.entity[box.coordinate1 - 1][box.coordinate2] is Wall && Sokoban.entity[box.coordinate1][box.coordinate2 - 1] is Wall) ||
+                (Sokoban.entity[box.coordinate1 + 1][box.coordinate2] is Wall && Sokoban.entity[box.coordinate1][box.coordinate2 - 1] is Wall) ||
+                (Sokoban.entity[box.coordinate1 - 1][box.coordinate2] is Wall && Sokoban.entity[box.coordinate1][box.coordinate2 + 1] is Wall)))
+                return true;
+            return false;
         }
     }
 
     class Pit : Entity
     {
         public Pit(char name)
+        {
+            this.name = name;
+        }
+
+        public override void Action(Entity entity)
+        {
+            
+        }
+    }
+
+    class Void : Entity
+    {
+        public Void(char name)
         {
             this.name = name;
         }

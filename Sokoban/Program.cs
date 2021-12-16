@@ -20,7 +20,7 @@ namespace Sokoban
             var directoryFiles = new DirectoryInfo(@"Levels\").GetFileSystemInfos();
             foreach(var element in directoryFiles)
             {
-                Console.WriteLine(" " + element.Name);
+                Console.WriteLine(" " + element.Name.Replace(".txt", ""));
             }
             Console.WriteLine();
             var isHave = false;
@@ -29,7 +29,7 @@ namespace Sokoban
             {
                 foreach (var element in directoryFiles)
                 {
-                    if(string.Compare(outputString,element.Name) == 0)
+                    if(string.Compare(outputString,element.Name.Replace(".txt", "")) == 0)
                     {
                         isHave = true;
                         break;
@@ -42,7 +42,7 @@ namespace Sokoban
                 }
             }
             
-            return outputString;
+            return outputString + ".txt";
         }
 
         static List<List<char>> ReadFile(string nameFile)

@@ -23,19 +23,19 @@ namespace Sokoban
                 Console.WriteLine(" " + element.Name.Replace(".txt", ""));
             }
             Console.WriteLine();
-            var isHave = false;
+            var isFile = false;
             var outputString = Console.ReadLine();
-            while (isHave != true)
+            while (isFile != true)
             {
                 foreach (var element in directoryFiles)
                 {
                     if(string.Compare(outputString,element.Name.Replace(".txt", "")) == 0)
                     {
-                        isHave = true;
+                        isFile = true;
                         break;
                     }
                 }
-                if (isHave == false)
+                if (isFile == false)
                 {
                     Console.WriteLine("Вы неправильно ввели, пробуйте заного!");
                     outputString = Console.ReadLine();
@@ -45,28 +45,18 @@ namespace Sokoban
             return outputString + ".txt";
         }
 
-        static List<List<char>> ReadFile(string nameFile)
+        static List<string> ReadFile(string nameFile)
         {
             var level = new StreamReader(@"Levels\" + nameFile);
-            var map = new List<List<char>>();
+            var map = new List<string>();
             var line = level.ReadLine();
             while (line != null)
             {
-                map.Add(CreateListChars(line));
+                map.Add(line);
                 line = level.ReadLine();
             }
             level.Close();
             return map;
-        }
-
-        static List<char> CreateListChars(string line)
-        {
-            var listChars = new List<char>();
-            for(var index = 0; index < line.Length; ++index)
-            {
-                listChars.Add(line[index]);
-            }
-            return listChars;
         }
     }
 }

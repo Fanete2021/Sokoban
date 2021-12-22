@@ -15,3 +15,12 @@ E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\ref\Sokoban.dll
 E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.pdb
 E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.genruntimeconfig.cache
 E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.csproj.ResolveComReference.cache
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\NUnit3.TestAdapter.dll
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\NUnit3.TestAdapter.pdb
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\nunit.engine.dll
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\nunit.engine.api.dll
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\nunit.engine.core.dll
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\testcentric.engine.metadata.dll
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\nunit.framework.dll
+E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.csproj.CopyComplete
+E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\nunitlite.dll

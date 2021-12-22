@@ -6,17 +6,60 @@ using System.Threading.Tasks;
 
 namespace Sokoban
 {
+    static class Entities
+    {
+        static public List<Entity> CreateListEntities(List<string> map)
+        {
+            var entity = new List<Entity>();
+            var index = 0;
+
+            for (var position1 = 0; position1 < map.Count; ++position1)
+            {
+                for (var position2 = 0; position2 < map[position1].Length; ++position2)
+                {
+                    entity.Add(CreateEntity(map[position1][position2], new Position(position1, position2), index));
+                    index++;
+                }
+            }
+
+            return entity;
+        }
+
+        static public Entity CreateEntity(char entity, Position position, int index)
+        {
+            switch (entity)
+            {
+                case '+':
+                    return new PlaceBox(entity, position, index);
+                case 'o':
+                    return new Box(entity, position, index);
+                case '?':
+                    return new Pit(entity, position, index);
+                case '#':
+                    return new Wall(entity, position, index);
+                case 'p':
+                    return Sokoban.player = new Player(entity, position, index);
+                default:
+                    return new Void(entity, position, index);
+            }
+        }
+    }
+
     abstract class Entity
     {
         public char name;
+        public Position position;
+        public int index;
         abstract public void Action(Entity entity);
     }
 
     class Wall: Entity
     {
-        public Wall(char name)
+        public Wall(char name, Position position, int index)
         {
             this.name = name;
+            this.position = position;
+            this.index = index;
         }
 
         public override void Action(Entity entity)
@@ -27,116 +70,76 @@ namespace Sokoban
 
     class Player: Entity
     {
-        public int coordinate1, coordinate2;
-
         public Direction directionMove = Direction.Nothing;
 
-        public Player(char name, int coordinate1, int coordinate2)
+        public Player(char name, Position position, int index)
         {
             this.name = name;
-            this.coordinate1 = coordinate1;
-            this.coordinate2 = coordinate2;
+            this.position = position;
+            this.index = index;
         }
 
         public override void Action(Entity entity)
         {
-            ConsoleKeyInfo keyPressed;
-            keyPressed = Console.ReadKey();
-            directionMove = DetermineDirection(keyPressed);
+            
         }
 
-        public (int, int) DetermineCoordinate()
+        public void MovePlayer(Position offsetPorition)
         {
-            if (directionMove == Direction.Up)
-                return (-1, 0);
-            if (directionMove == Direction.Right)
-                return (0, 1);
-            if (directionMove == Direction.Left)
-                return (0, -1);
-            if (directionMove == Direction.Down)
-                return (1, 0);
-            return (0, 0);
-        }
-
-        static private Direction DetermineDirection(ConsoleKeyInfo keyPressed)
-        {
-            if (keyPressed.Key == ConsoleKey.UpArrow)
-                return Direction.Up;
-            if (keyPressed.Key == ConsoleKey.RightArrow)
-                return Direction.Right;
-            if (keyPressed.Key == ConsoleKey.LeftArrow)
-                return Direction.Left;
-            if (keyPressed.Key == ConsoleKey.DownArrow)
-                return Direction.Down;
-            return Direction.Nothing;
-        }
-
-        public void MovePlayer()
-        {
-            var offset = Sokoban.player.DetermineCoordinate();
-            Sokoban.ChangeListEntity(coordinate1, coordinate2, coordinate1 + offset.Item1, coordinate2 + offset.Item2);
+            Sokoban.ChangeEntity(this.index, Sokoban.FindEntity(position + offsetPorition));
         }
     }
 
     class PlaceBox: Entity
     {
-        public PlaceBox(char name)
+        public PlaceBox(char name, Position position, int index)
         {
             this.name = name;
+            this.position = position;
+            this.index = index;
         }
 
         public override void Action(Entity entity)
         {
             if (entity is Box)
             {
-                Box.countInPlace++;
+                Sokoban.countInPlace++;
             }
         }
     }
 
     class Box : Entity
     {
-        static public int countInPlace = 0, allBox = 0;
-        private int coordinate1, coordinate2;
-        public Box(char name, int coordinate1, int coordinate2)
+        public Box(char name, Position position, int index)
         {
             this.name = name;
-            this.coordinate1 = coordinate1;
-            this.coordinate2 = coordinate2;
-            if(Sokoban.countMoves == 0)
-                allBox++;
+            this.position = position;
+            this.index = index;
+            if (Sokoban.countMoves == 0)
+                Sokoban.allBox++;
         }
 
         public override void Action(Entity entity)
         {
-            var offset = Sokoban.player.DetermineCoordinate();
-            if (Sokoban.entity[coordinate1 + offset.Item1][coordinate2 + offset.Item2].name != '#' && char.ToLower(Sokoban.entity[coordinate1 + offset.Item1][coordinate2 + offset.Item2].name) != 'o')
+            var offsetPosition = Sokoban.DeterminePosition(Sokoban.player.directionMove);
+            var indexSelectedEntity = Sokoban.FindEntity(position + offsetPosition);
+            if (!(Sokoban.entities[indexSelectedEntity] is Wall) && !(Sokoban.entities[indexSelectedEntity] is Box))
             {
-                Sokoban.entity[coordinate1 + offset.Item1][coordinate2 + offset.Item2].Action(this);
-                Sokoban.ChangeListEntity(coordinate1, coordinate2, coordinate1 + offset.Item1, coordinate2 + offset.Item2);
-                Sokoban.player.MovePlayer();
-                coordinate1 += offset.Item1;
-                coordinate2 += offset.Item2;
+                Sokoban.entities[indexSelectedEntity].Action(this);
+                Sokoban.ChangeEntity(Sokoban.FindEntity(this.position), Sokoban.FindEntity(position + offsetPosition));
+                Sokoban.player.MovePlayer(offsetPosition);
+                position += offsetPosition;
             }
-        }
-
-        static public bool isDefeat(Box box)
-        {
-            if (box.name != 'O' &&
-                ((Sokoban.entity[box.coordinate1 + 1][box.coordinate2] is Wall && Sokoban.entity[box.coordinate1][box.coordinate2 + 1] is Wall) ||
-                (Sokoban.entity[box.coordinate1 - 1][box.coordinate2] is Wall && Sokoban.entity[box.coordinate1][box.coordinate2 - 1] is Wall) ||
-                (Sokoban.entity[box.coordinate1 + 1][box.coordinate2] is Wall && Sokoban.entity[box.coordinate1][box.coordinate2 - 1] is Wall) ||
-                (Sokoban.entity[box.coordinate1 - 1][box.coordinate2] is Wall && Sokoban.entity[box.coordinate1][box.coordinate2 + 1] is Wall)))
-                return true;
-            return false;
         }
     }
 
     class Pit : Entity
     {
-        public Pit(char name)
+        public Pit(char name, Position position, int index)
         {
             this.name = name;
+            this.position = position;
+            this.index = index;
         }
 
         public override void Action(Entity entity)
@@ -147,9 +150,11 @@ namespace Sokoban
 
     class Void : Entity
     {
-        public Void(char name)
+        public Void(char name, Position position, int index)
         {
             this.name = name;
+            this.position = position;
+            this.index = index;
         }
 
         public override void Action(Entity entity)

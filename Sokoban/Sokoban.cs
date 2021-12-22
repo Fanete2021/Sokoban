@@ -6,14 +6,19 @@ namespace Sokoban
     static class Sokoban
     {
         static public Player player;
-        static public List<List<Entity>> entity;
+        static public List<Entity> entities;
         static public int countMoves = 0;
+        static public int countInPlace = 0, allBox = 0;
 
-        static public void InitializeGame(List<List<char>> map)
+        static public void InitializeGame(List<string> map)
         {
-            FillListEntities(map);
-            PrintMap();
+            entities = Entities.CreateListEntities(map);
+            Graphics.PrintMap(entities, countMoves);
+            Game();
+        }
 
+        static public void Game()
+        {
             var actResult = ActResult.Nothing;
 
             while (actResult == ActResult.Nothing)
@@ -27,102 +32,124 @@ namespace Sokoban
                 Console.WriteLine("Вы проиграли!");
         }
 
-        static private void FillListEntities(List<List<char>> map)
-        {
-            entity = new List<List<Entity>>();
-
-            for (var index1 = 0; index1 < map.Count; ++index1)
-            {
-                entity.Add(new List<Entity>());
-                for (var index2 = 0; index2 < map[index1].Count; ++index2)
-                {
-                    entity[index1].Add(CreateEntity(map[index1][index2], index1, index2));
-                }
-            }
-        }
-
-        static private Entity CreateEntity(char entity, int index1, int index2)
-        {
-            switch (entity)
-            {
-                case '+':
-                    return new PlaceBox(entity);
-                case 'o':
-                    return new Box(entity, index1, index2);
-                case '?':
-                    return new Pit(entity);
-                case '#':
-                    return new Wall(entity);
-                case 'p':
-                    player = new Player(entity, index1, index2);
-                    return player;
-                default:
-                    return new Void(entity);
-            }
-        }
-
-        static private void PrintMap()
-        {
-            Console.Clear();
-            for (var index1 = 0; index1 < entity.Count; ++index1)
-            {
-                for (var index2 = 0; index2 < entity[index1].Count; ++index2)
-                {
-                    Console.Write(entity[index1][index2].name);
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine("\nСчётчик победы " + Box.countInPlace + "/" + Box.allBox + "\nСчётчик ходов " + countMoves);
-        }
-
         static private ActResult Act()
         {
-            player.Action(null);
-            var coordinatesPlayer = player.DetermineCoordinate();
-            var selectedEntity = entity[player.coordinate1 + coordinatesPlayer.Item1][player.coordinate2 + coordinatesPlayer.Item2];
+            ConsoleKeyInfo keyPressed;
+            keyPressed = Console.ReadKey();
 
-            if (player.directionMove == Direction.Nothing || selectedEntity.name == '#')
+            player.directionMove = DetermineDirection(keyPressed);
+            var offsetCoordinatesPlayer = DeterminePosition(player.directionMove);
+            var selectedEntity = entities[FindEntity(player.position + offsetCoordinatesPlayer)];
+
+            if (player.directionMove == Direction.Nothing || selectedEntity is Wall)
                 return ActResult.Nothing;
             else
             {
+                countMoves++;
                 selectedEntity.Action(player);
             }
 
-            countMoves++;
-
             if (!(selectedEntity is Box))
-                player.MovePlayer();
-            //else if(Box.isDefeat((Box)selectedEntity))
+                player.MovePlayer(offsetCoordinatesPlayer);
 
+            Graphics.PrintMap(entities, countMoves);
 
-            PrintMap();
-
-            if (Box.allBox == Box.countInPlace)
+            if (isWin())
                 return ActResult.Win;
-            if (selectedEntity is Pit)
+            if (isDefeat(entities[FindEntity(selectedEntity.position)]))
                 return ActResult.Defeat;
 
             return ActResult.Nothing;
         }
 
-        static public void ChangeListEntity(int coordinate1, int coordinate2, int coordinate3, int coordinate4)
+        static public bool isWin()
         {
-            if (entity[coordinate3][coordinate4] is PlaceBox)
-            {
-                entity[coordinate3][coordinate4] = CreateEntity(entity[coordinate1][coordinate2].name, coordinate3, coordinate4);
-                entity[coordinate3][coordinate4].name = char.ToUpper(entity[coordinate3][coordinate4].name);
-            }
-            else if (!(entity[coordinate3][coordinate4] is Pit))
-                entity[coordinate3][coordinate4] = CreateEntity(char.ToLower(entity[coordinate1][coordinate2].name), coordinate3, coordinate4);
+            if (allBox == countInPlace)
+                return true;
+            return false;
+        }
 
-            if (entity[coordinate1][coordinate2].name == 'P' || entity[coordinate1][coordinate2].name == 'O')
-            {
-                if (entity[coordinate1][coordinate2].name == 'O')
-                    Box.countInPlace--;
-                entity[coordinate1][coordinate2] = CreateEntity('+', coordinate1, coordinate2);
+        static public bool isDefeat(Entity selectedEntity)
+        {
+            if (selectedEntity is Pit ||
+                (selectedEntity is Box && (entities[FindEntity(selectedEntity.position)] is Pit || isBoxStuck(selectedEntity))))
+                return true;
+            return false;
+        }
+
+        static public int FindEntity(Position position)
+        {
+            for(int index = 0; index < entities.Count; ++index)
+            { 
+                if (Position.CompareTo(position, entities[index].position))
+                    return index;
             }
-            if (entity[coordinate1][coordinate2].name == 'p' || entity[coordinate1][coordinate2].name == 'o')
-                entity[coordinate1][coordinate2] = CreateEntity(' ', coordinate1, coordinate2);
+
+            throw new ArgumentNullException("missing element");
+        }
+
+        static public void ChangeEntity(int indexEntity1, int indexEntity2)
+        {
+            if (entities[indexEntity2] is PlaceBox)
+            {
+                entities[indexEntity2] = Entities.CreateEntity(entities[indexEntity1].name, entities[indexEntity2].position, indexEntity2);
+                entities[indexEntity2].name = Char.ToUpper(entities[indexEntity2].name);
+            }
+            else if (!(entities[indexEntity2] is Pit))
+                entities[indexEntity2] = Entities.CreateEntity(Char.ToLower(entities[indexEntity1].name), entities[indexEntity2].position, indexEntity2);
+
+            if (char.IsUpper(entities[indexEntity1].name))
+            {
+                if (entities[indexEntity1] is Box)
+                    countInPlace--;
+                entities[indexEntity1] = Entities.CreateEntity('+', entities[indexEntity1].position, indexEntity1);
+            }
+            else
+            {
+                entities[indexEntity1] = Entities.CreateEntity(' ', entities[indexEntity1].position, indexEntity1);
+            }
+        }
+
+        static public Position DeterminePosition(Direction direction)
+        {
+            if (direction == Direction.Up)
+                return new Position(-1, 0);
+            if (direction == Direction.Right)
+                return new Position(0, 1);
+            if (direction == Direction.Left)
+                return new Position(0, -1);
+            if (direction == Direction.Down)
+                return new Position(1, 0);
+            return new Position(0, 0);
+        }
+
+        static public Direction DetermineDirection(ConsoleKeyInfo keyPressed)
+        {
+            if (keyPressed.Key == ConsoleKey.UpArrow)
+                return Direction.Up;
+            if (keyPressed.Key == ConsoleKey.RightArrow)
+                return Direction.Right;
+            if (keyPressed.Key == ConsoleKey.LeftArrow)
+                return Direction.Left;
+            if (keyPressed.Key == ConsoleKey.DownArrow)
+                return Direction.Down;
+            return Direction.Nothing;
+        }
+
+        static public bool isBoxStuck(Entity box)
+        {
+            var entityLeft = FindEntity(new Position(box.position.position1, box.position.position2 - 1));
+            var entityRight = FindEntity(new Position(box.position.position1, box.position.position2 + 1));
+            var entityAbove = FindEntity(new Position(box.position.position1 - 1, box.position.position2));
+            var entityBelow = FindEntity(new Position(box.position.position1 + 1, box.position.position2));
+
+            if (!(char.IsUpper(box.name)) &&
+                (entities[entityAbove] is Wall && entities[entityRight] is Wall) ||
+                (entities[entityAbove] is Wall && entities[entityLeft] is Wall) ||
+                (entities[entityBelow] is Wall && entities[entityRight] is Wall) ||
+                (entities[entityBelow] is Wall && entities[entityLeft] is Wall))
+                return true;
+            return false;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Sokoban
 {
-    enum Direction
+    public enum Direction
     {
         Right,
         Left,
@@ -9,7 +9,7 @@
         Nothing
     }
 
-    enum ActResult
+    public enum ActResult
     {
         Win,
         Defeat,

@@ -9,8 +9,7 @@
       "Sokoban/1.0.0": {
         "dependencies": {
           "NUnit": "3.13.2",
-          "NUnit3TestAdapter": "4.1.0",
-          "NUnitLite": "3.13.2"
+          "NUnit3TestAdapter": "4.1.0"
         },
         "runtime": {
           "Sokoban.dll": {}
@@ -33,19 +32,7 @@
           }
         }
       },
-      "NUnit3TestAdapter/4.1.0": {},
-      "NUnitLite/3.13.2": {
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "NUnit": "3.13.2"
-        },
-        "runtime": {
-          "lib/netstandard2.0/nunitlite.dll": {
-            "assemblyVersion": "3.13.2.0",
-            "fileVersion": "3.13.2.0"
-          }
-        }
-      }
+      "NUnit3TestAdapter/4.1.0": {}
     }
   },
   "libraries": {
@@ -81,13 +68,6 @@
       "sha512": "sha512-v45RJt87pPAWlCDIftmtQhNK0mXd81IcnTE6SmWUmxi6YegCvkQogZQ/ROw4zyNyo2HI3Ckby3LB0GHF4bEIXg==",
       "path": "nunit3testadapter/4.1.0",
       "hashPath": "nunit3testadapter.4.1.0.nupkg.sha512"
-    },
-    "NUnitLite/3.13.2": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-1TCpCvhyYLZwDbI9Eglc3nRx7933cvPkHvd2znsUdicUAsHNS+7RDqiD1nxqi4Q14TZTS/lww1NyLTzznEbHMQ==",
-      "path": "nunitlite/3.13.2",
-      "hashPath": "nunitlite.3.13.2.nupkg.sha512"
     }
   }
 }

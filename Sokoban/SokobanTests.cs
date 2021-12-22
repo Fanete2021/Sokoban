@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace Sokoban
 {
-    static class SokobanTests
+    static class TestGame
     {
         static List<Entity> entities;
 
@@ -60,8 +60,8 @@ namespace Sokoban
             var commands = new List<Direction>(new Direction[] { Direction.Up, Direction.Right, Direction.Right, Direction.Right });
             var expectedResult = ActResult.Defeat;
 
-            SokobanTests.CreateMap(file);
-            var result = SokobanTests.Game(commands);
+            TestGame.CreateMap(file);
+            var result = TestGame.Game(commands);
 
             Assert.AreEqual(result, expectedResult);
         }
@@ -74,8 +74,8 @@ namespace Sokoban
             var commands = new List<Direction>(args);
             var expectedResult = ActResult.Defeat;
 
-            SokobanTests.CreateMap(file);
-            var result = SokobanTests.Game(commands);
+            TestGame.CreateMap(file);
+            var result = TestGame.Game(commands);
 
             Assert.AreEqual(result, expectedResult);
         }
@@ -87,8 +87,8 @@ namespace Sokoban
             var commands = new List<Direction>(new Direction[] { Direction.Up, Direction.Up});
             var expectedResult = ActResult.Win;
 
-            SokobanTests.CreateMap(file);
-            var result = SokobanTests.Game(commands);
+            TestGame.CreateMap(file);
+            var result = TestGame.Game(commands);
 
             Assert.AreEqual(result, expectedResult);
         }

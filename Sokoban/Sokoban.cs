@@ -7,8 +7,7 @@ namespace Sokoban
     {
         static public Player player;
         static public List<Entity> entities;
-        static public int countMoves = 0;
-        static public int countInPlace = 0, allBox = 0;
+        static public int countMoves = 0, countInPlace = 0, allBox = 0;
 
         static public void InitializeGame(List<string> map)
         {

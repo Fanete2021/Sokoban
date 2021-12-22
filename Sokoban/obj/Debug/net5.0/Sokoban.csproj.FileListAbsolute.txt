@@ -23,4 +23,3 @@ E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\nunit.engine.core.dll
 E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\testcentric.engine.metadata.dll
 E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\nunit.framework.dll
 E:\Prog\Sokoban\Sokoban\obj\Debug\net5.0\Sokoban.csproj.CopyComplete
-E:\Prog\Sokoban\Sokoban\bin\Debug\net5.0\nunitlite.dll

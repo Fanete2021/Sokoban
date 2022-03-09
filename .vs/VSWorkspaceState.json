@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Sokoban",
+    "\\Sokoban\\Entities"
   ],
-  "SelectedNode": "\\Sokoban.sln",
+  "SelectedNode": "\\Sokoban\\Entities\\Entities.cs",
   "PreviewInSolutionExplorer": false
 }

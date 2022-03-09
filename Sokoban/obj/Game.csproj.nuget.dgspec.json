@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Game.csproj": {}
+    "C:\\Users\\obsag\\source\\repos\\Sokoban\\Sokoban\\Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Game.csproj": {
+    "C:\\Users\\obsag\\source\\repos\\Sokoban\\Sokoban\\Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Game.csproj",
+        "projectUniqueName": "C:\\Users\\obsag\\source\\repos\\Sokoban\\Sokoban\\Game.csproj",
         "projectName": "Game",
-        "projectPath": "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Game.csproj",
+        "projectPath": "C:\\Users\\obsag\\source\\repos\\Sokoban\\Sokoban\\Game.csproj",
         "packagesPath": "C:\\Users\\obsag\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\obj\\",
+        "outputPath": "C:\\Users\\obsag\\source\\repos\\Sokoban\\Sokoban\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\obsag\\AppData\\Roaming\\NuGet\\NuGet.Config",

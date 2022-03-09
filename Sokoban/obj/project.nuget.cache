@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RxmUHPf7H/m8fvbc0JXXF0tEyzM/BygiitJdZBEPwMUaXq2zKVFVAI1EUFl55VPdLGITaumyAp97M8lDpPK3QA==",
+  "dgSpecHash": "U+oXSGxW+T9xlkGXPj8zbnCsWP3VWjn+9z36QhQOKQ7CXjfUQIJ7CxMpXhBuX9VORMSpcd7qM+SeGIR3LWFvSw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Game.csproj",
+  "projectFilePath": "C:\\Users\\obsag\\source\\repos\\Sokoban\\Sokoban\\Game.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\obsag\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
     "C:\\Users\\obsag\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

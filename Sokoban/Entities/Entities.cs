@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.Graphic;
 using SFML.Graphics;
 using SFML.System;
 using System;
@@ -78,7 +79,7 @@ namespace Entities
             Index = index;
 
             var typeEntity = this.GetType().ToString().Replace("Entities.", "");
-            Texture = new Texture("..\\..\\Content\\" + typeEntity + ".png");
+            Texture = Textures.GetTexture(typeEntity);
 
             rectShape = new RectangleShape(new Vector2f(rectShapeSize, rectShapeSize));
             rectShape.Position = new Vector2f(this.Position.X * 100, this.Position.Y * 100);

@@ -29,7 +29,7 @@ namespace Graphic
                 form.Clear(Color.White);
                 form.Draw(map);
                 form.Display();
-                Thread.Sleep(50);
+                Thread.Sleep(100);
             }
 
             Console.Clear();

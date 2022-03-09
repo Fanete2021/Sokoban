@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Prog\\Sokoban\\Sokoban\\Sokoban.csproj": {}
+    "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Sokoban.csproj": {}
   },
   "projects": {
-    "E:\\Prog\\Sokoban\\Sokoban\\Sokoban.csproj": {
+    "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Sokoban.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Prog\\Sokoban\\Sokoban\\Sokoban.csproj",
+        "projectUniqueName": "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Sokoban.csproj",
         "projectName": "Sokoban",
-        "projectPath": "E:\\Prog\\Sokoban\\Sokoban\\Sokoban.csproj",
+        "projectPath": "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Sokoban.csproj",
         "packagesPath": "C:\\Users\\obsag\\.nuget\\packages\\",
-        "outputPath": "E:\\Prog\\Sokoban\\Sokoban\\obj\\",
+        "outputPath": "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\obsag\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +47,10 @@
             "NUnit3TestAdapter": {
               "target": "Package",
               "version": "[4.1.0, )"
+            },
+            "SFML.Net": {
+              "target": "Package",
+              "version": "[2.5.0, )"
             }
           },
           "imports": [

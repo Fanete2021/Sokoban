@@ -1,13 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "1OdQbBRR3jukGXs1XB/EH2SOuFxPJ1nJ7yJwOk8uIS377DF2hdTmHYu3o4ixDF4LHbLlbhpzib68037Q1FiPAw==",
+  "dgSpecHash": "RxmUHPf7H/m8fvbc0JXXF0tEyzM/BygiitJdZBEPwMUaXq2zKVFVAI1EUFl55VPdLGITaumyAp97M8lDpPK3QA==",
   "success": true,
-  "projectFilePath": "E:\\Prog\\Sokoban\\Sokoban\\Sokoban.csproj",
+  "projectFilePath": "C:\\Users\\obsag\\Source\\Repos\\Sokoban\\Sokoban\\Game.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\obsag\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
     "C:\\Users\\obsag\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\obsag\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\obsag\\.nuget\\packages\\nunit\\3.13.2\\nunit.3.13.2.nupkg.sha512",
-    "C:\\Users\\obsag\\.nuget\\packages\\nunit3testadapter\\4.1.0\\nunit3testadapter.4.1.0.nupkg.sha512"
+    "C:\\Users\\obsag\\.nuget\\packages\\nunit3testadapter\\4.1.0\\nunit3testadapter.4.1.0.nupkg.sha512",
+    "C:\\Users\\obsag\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
+    "C:\\Users\\obsag\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
+    "C:\\Users\\obsag\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
+    "C:\\Users\\obsag\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
+    "C:\\Users\\obsag\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,26 +1,23 @@
-﻿namespace Sokoban
+﻿namespace Game
 {
-    class Position
+    public class Position
     {
-        public int position1, position2;
+        public int Y, X;
 
-        public Position(int position1, int position2)
+        public Position(int y, int x)
         {
-            this.position1 = position1;
-            this.position2 = position2;
+            Y = y;
+            X = x;
         }
 
-        public static Position operator +(Position position1, Position position2)
+        public static Position operator +(Position a, Position b)
         {
-            return new Position(position1.position1 + position2.position1, position1.position2 + position2.position2);
+            return new Position(a.Y + b.Y, a.X + b.X);
         }
 
-        public static bool CompareTo(Position position1, Position position2)
+        public static bool CompareTo(Position a, Position b)
         {
-            if (position1.position1 == position2.position1 && position1.position2 == position2.position2)
-                return true;
-
-            return false;
+            return a.Y == b.Y && a.X == b.X;
         }
     }
 }
